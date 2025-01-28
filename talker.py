@@ -36,15 +36,21 @@
 ## Simple talker demo that published std_msgs/Strings messages
 ## to the 'chatter' topic
 
+import random as rndm
 import rospy
 from std_msgs.msg import String
+
+def myrandom():
+    RANDOM_NUMBER=rndm.randint(1,999999999)
+    return int(RANDOM_NUMBER)
 
 def talker():
     pub = rospy.Publisher('chatter', String, queue_size=10)
     rospy.init_node('talker', anonymous=True)
     rate = rospy.Rate(10) # 10hz
+    myrnd = myrandom()
     while not rospy.is_shutdown():
-        hello_str = "hello world %s" % rospy.get_time()
+        hello_str = "hello world %s %s" % (rospy.get_time() , myrnd)
         rospy.loginfo(hello_str)
         pub.publish(hello_str)
         rate.sleep()
