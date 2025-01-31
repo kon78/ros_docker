@@ -1,0 +1,49 @@
+version: '2'
+
+networks:
+  ros:
+    driver: bridge
+
+services:      
+  master:
+    build: .
+    container_name: master
+    networks:
+      - ros
+    command:
+      - roscore
+    restart: always
+
+  talker:
+    build: .
+    container_name: talker
+    environment:
+      - "ROS_HOSTNAME=talker"
+      - "ROS_MASTER_URI=http://master:11311"
+    networks:
+      - ros
+    command: bash -c "
+      cd /app/data
+      && ./script.bash
+      && ifconfig | grep inet
+      && roslaunch beginner_tutorials talker_launch.launch"
+    volumes:
+      - /home/kostya/dock_data:/app/data
+    restart: always
+
+  listener:
+    build: .
+    container_name: listener
+    environment:
+      - "ROS_HOSTNAME=listener"
+      - "ROS_MASTER_URI=http://master:11311"
+    networks:
+      - ros
+    command: bash -c "
+      cd /app/data
+      && ./script.bash
+      && ifconfig | grep inet      
+      && roslaunch beginner_tutorials listener_launch.launch"
+    volumes:
+      - /home/kostya/dock_data2:/app/data
+    restart: always
