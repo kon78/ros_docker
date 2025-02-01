@@ -2,7 +2,7 @@
 
 - How to run a containers?
 
-##_First, build network._
+## _First, build network._
 
 ```
 docker network create foo
@@ -15,7 +15,7 @@ docker network ls
 docker inspect foo
 ```
 
-##_Second, run master._
+## _Second, run master._
 
 ```
 docker run -it --rm --net foo --name master -p 11311 ros:noetic-ros-core roscore
@@ -27,7 +27,7 @@ docker run -it --rm --net foo --name master -p 11311 ros:noetic-ros-core roscore
 > ros:noetic-ros-core _image ros_
 > roscore _You must have a roscore running in order for ROS nodes to communicate._
 
-##_Third, run talker._
+## _Third, run talker._
 
 ```
 docker run -it --rm -v /home/kostya/dock_data:/app/data -p 11311 --net foo --name talker --env ROS_HOSTNAME=talker --env ROS_MASTER_URI=http://master:11311 ros:noetic-ros-coreOS_HOSTNAME=talker --env ROS_MASTER_URI=http://master:11311 ros:noetic-ros-coreOS_HOSTNAME=talker --env ROS_MASTER_URI=http://master:11311 ros:noetic-ros-core
@@ -36,7 +36,7 @@ docker run -it --rm -v /home/kostya/dock_data:/app/data -p 11311 --net foo --nam
 > -v /home/kostya/dock_data:/app/data _mounted folder /home/kostya/dock_data outter folder (your pc), /app/data inner folder (container)_
 > --env environment _host name & net address_
 
-##_Fourth, run listener._
+## _Fourth, run listener._
 
 ```
 docker run -it --rm --net foo -v /home/kostya/dock_data2:/app/data -p 11311 --name listener --env ROS_HOSTNAME=listener --env ROS_MASTER_URI=http://master:11311 ros:noetic-ros-core
@@ -73,7 +73,7 @@ Python script listener.py
 
 - Scripts are executed manually (not docker compose).
 
-##container's talker & listener.
+## _container's talker & listener._
 
 ```
 cd /app/data
