@@ -10,6 +10,8 @@ RUN wget -q https://xpra.org/gpg.asc -O- | apt-key add -
 RUN apt install xpra -y
 RUN apt install xterm -y
 RUN mkdir -p /run/user/0/xpra
+RUN apt install -y \
+    netcat nano net-tools openssh-server iputils-ping
 #ENTRYPOINT ["xpra", "start", "--bind-tcp=0.0.0.0:8080", \
 #    "--mdns=no", "--webcam=no", "--no-daemon", \
 ## "--start-on-connect=lxterminal", \
