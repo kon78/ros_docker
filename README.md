@@ -30,7 +30,7 @@ docker run -it --rm --net foo --name master -p 11311 ros:noetic-ros-core roscore
 ## _Third, run talker._
 
 ```
-docker run -it --rm -v /home/kostya/dock_data:/app/data -p 11311 --net foo --name talker --env ROS_HOSTNAME=talker --env ROS_MASTER_URI=http://master:11311 ros:noetic-ros-coreOS_HOSTNAME=talker --env ROS_MASTER_URI=http://master:11311 ros:noetic-ros-coreOS_HOSTNAME=talker --env ROS_MASTER_URI=http://master:11311 ros:noetic-ros-core
+docker run -it --rm -v /home/kostya/dock_data:/app/data -p 11311 --net foo --name talker --env ROS_HOSTNAME=talker --env ROS_MASTER_URI=http://master:11311 ros:noetic-ros-core
 ```
 
 > -v /home/kostya/dock_data:/app/data _mounted folder /home/kostya/dock_data outter folder (your pc), /app/data inner folder (container)_
